@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.Entity.Student;
 import com.example.Repository.StudentRepository;
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +20,7 @@ public class AmigoJpaApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
         return args -> {
-            Student maria = new Student("Maria",
+           /* Student maria = new Student("Maria",
                     "Jones",
                     "maria@gmail.com",
                     32);
@@ -42,7 +43,7 @@ public class AmigoJpaApplication {
             //studentRepository.save(maria);
             System.out.println("================Adding maria and maya===========================");
             studentRepository.saveAll(List.of(maria, maya,martha,Brandon,maria2));
-		/*	System.out.println("=======================No of Students==========================");
+		*//*	System.out.println("=======================No of Students==========================");
 			System.out.println(studentRepository.count());//counting total tuples/people
 
 			studentRepository.findById(2L).ifPresentOrElse(System.out::println,
@@ -59,7 +60,7 @@ public class AmigoJpaApplication {
 			System.out.println("=======================delete id 2: ==========================");
 			studentRepository.deleteById(2L);
 			System.out.println("=======================No of Students:==========================");
-			System.out.println(studentRepository.count());*/
+			System.out.println(studentRepository.count());*//*
             studentRepository
                     .findStudentByEmail("maria@gmail.com").
                     ifPresentOrElse(System.out::println,
@@ -74,7 +75,16 @@ public class AmigoJpaApplication {
                             ("Maria",18).forEach(System.out::println);
 
             System.out.println("============deleting maria with id=5===========");
-            System.out.println(studentRepository.deleteStudentById(5L));
+            System.out.println(studentRepository.deleteStudentById(5L));*/
+            Faker faker = new Faker();
+            for (int i = 0; i < 20; i++) {
+                String firstName = faker.name().firstName();
+                String lastName = faker.name().lastName();
+                String email = String.format("%s.%s@helper.in", firstName, lastName);
+                Student student = new Student(firstName, lastName, email,
+                        faker.number().numberBetween(18, 50));
+                studentRepository.save(student);
+            }
         };
     }
 }
