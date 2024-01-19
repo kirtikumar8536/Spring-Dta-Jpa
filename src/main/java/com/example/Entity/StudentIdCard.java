@@ -16,10 +16,10 @@ public class StudentIdCard {
     private Long id;
     @Column(name = "card_number", nullable = false, length = 15)
     private String cardNumber;
-    //don't use Lazy here if u are not using  @OneToOne in Student.java
+    //--don't use Lazy here if u are not using  @OneToOne in Student.java
     @OneToOne(cascade = CascadeType.ALL,//36,37
             fetch = FetchType.EAGER,
-            orphanRemoval = false)//default fetch type is eager//39.
+            orphanRemoval = false)//default fetch type is eager//39.default value of orphanRemoval is false
     @JoinColumn(
             name = "student_id",
             referencedColumnName = "id"//comes from student class id
