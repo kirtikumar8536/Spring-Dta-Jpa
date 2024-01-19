@@ -19,7 +19,7 @@ public class StudentIdCard {
     //don't use Lazy here if u are not using  @OneToOne in Student.java
     @OneToOne(cascade = CascadeType.ALL,//36,37
             fetch = FetchType.EAGER,
-            orphanRemoval = true)//default fetch type is eager//39
+            orphanRemoval = false)//default fetch type is eager//39.
     @JoinColumn(
             name = "student_id",
             referencedColumnName = "id"//comes from student class id

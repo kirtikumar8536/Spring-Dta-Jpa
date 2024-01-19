@@ -23,7 +23,7 @@ public class Student {
     private String email;
     @Column(name="age",nullable = false)
     private Integer age;
-    @OneToOne(mappedBy = "student") //this student comes from StudentIdCard property
+    @OneToOne(mappedBy = "student",orphanRemoval = true) //this student comes from StudentIdCard property.
     private StudentIdCard studentIdCard;
 
     public Student() {

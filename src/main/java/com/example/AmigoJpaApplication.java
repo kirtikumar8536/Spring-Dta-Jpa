@@ -52,6 +52,12 @@ public class AmigoJpaApplication {
             Hibernate: select sic1_0.id,sic1_0.card_number,s1_0.id,s1_0.age,s1_0.email,s1_0.first_name,s1_0.last_name from student_id_card sic1_0 left join student s1_0 on s1_0.id=sic1_0.student_id where sic1_0.id=?
             StudentIdCard{id=1, cardNumber='123456789', student=Student{id=1, firstName='Alan', lastName='Quigley', email='Alan.Quigley@helper.in', age=29}}
 */
+            System.out.println("============");
+           /* select s1_0.id,s1_0.age,s1_0.email,s1_0.first_name,s1_0.last_name,sic1_0.id,sic1_0.card_number from student s1_0
+            left join student_id_card sic1_0 on s1_0.id=sic1_0.student_id where s1_0.id=?*/
+//            Hibernate: delete from student_id_card where id=?
+//            Hibernate: delete from student where id=?
+            studentRepository.deleteById(1L);
 
         };
     }
