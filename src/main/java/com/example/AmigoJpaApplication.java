@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.Entity.Book;
+import com.example.Entity.Course;
 import com.example.Entity.Student;
 import com.example.Entity.StudentIdCard;
 import com.example.Repository.StudentIdCardRepository;
@@ -10,9 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,6 +45,9 @@ public class AmigoJpaApplication {
             //Here im not using student repo to save Student property data
             //studentIdCardRepository.save(studentIdCard);
             student.setStudentIdCard(studentIdCard);
+            student.enrolToCourse(new Course("computer science","IT"));
+            student.enrolToCourse(new Course("Amigos code spring data jpa","IT"));
+
             studentRepository.save(student);
             studentRepository.findById(1L).
                     ifPresent(System.out::println);
@@ -59,19 +60,11 @@ public class AmigoJpaApplication {
                         });
                     });
 
-            // by default OneToOne mapping uses FetchType.EAGER so that here student object will be load here
-//            studentIdCardRepository.findById(1L).
-//                    ifPresent(System.out::println);
 
         };
     }
 
-  /*  private  void sorting(StudentRepository studentRepository) {
-        Sort sort = Sort.by("firstName").ascending()
-                .and(Sort.by("age").ascending());
-        studentRepository.
-                findAll(sort).forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
-    }*/
+
 
     private void generateRandomStudents(StudentRepository studentRepository) {
         Faker faker = new Faker();
