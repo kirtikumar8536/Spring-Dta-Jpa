@@ -28,12 +28,14 @@ public class Student {
     private String email;
     @Column(name = "age", nullable = false)
     private Integer age;
-    @OneToOne(mappedBy = "student", orphanRemoval = true) //this student comes from StudentIdCard property.
+    @OneToOne(mappedBy = "student", orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE} ) //this student comes from StudentIdCard property.
     private StudentIdCard studentIdCard;
 
     @OneToMany(mappedBy = "student",//comes from Book field(student)
-            orphanRemoval = true, cascade = {CascadeType.PERSIST,
-            CascadeType.REMOVE},fetch = FetchType.LAZY)//default is Lazy
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY)//default is Lazy
     private List<Book> books = new ArrayList<>();
 
     public Student() {
@@ -68,6 +70,10 @@ public class Student {
 
     public Integer getAge() {
         return age;
+    }
+
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
     }
 
     public void addBook(Book book) {

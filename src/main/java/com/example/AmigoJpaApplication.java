@@ -45,15 +45,17 @@ public class AmigoJpaApplication {
 
             //Here im not using BookRepository still im able to save the book data due to Cascade
             //Here im not using student repo to save Student property data
-            studentIdCardRepository.save(studentIdCard);
+            //studentIdCardRepository.save(studentIdCard);
+            student.setStudentIdCard(studentIdCard);
+            studentRepository.save(student);
             studentRepository.findById(1L).
                     ifPresent(System.out::println);
             studentRepository.findById(1L).
-                    ifPresent(s->{
+                    ifPresent(s -> {
                         System.out.println("fetch Book Lazy.....");
                         List<Book> books = student.getBooks();
                         books.forEach(book -> {
-                            System.out.println(s.getFirstName()+" -borrowed- "+book.getBookName());
+                            System.out.println(s.getFirstName() + " -borrowed- " + book.getBookName());
                         });
                     });
 
